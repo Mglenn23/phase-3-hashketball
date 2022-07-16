@@ -127,3 +127,85 @@ def game_hash
 end
 
 # Write code here
+require "pry"
+def shoe_size(playerName)
+
+  game_hash.each do |team|
+  
+    team[1][:players].each do |player|
+      if(player[:player_name]==playerName)
+         return player[:shoe]
+       end
+    end
+    end
+end
+# shoe_size("Bismack Biyombo")
+
+def team_colors(teamCol)
+  game_hash.each do |team|
+    # puts team[1][:team_name]
+    if(team[1][:team_name]==teamCol)
+       return team[1][:colors]
+     
+    end
+  end
+end
+# team_colors("Brooklyn Nets")
+
+def team_names
+  arr=[]
+  game_hash.each do |team|
+    arr.push( team[1][:team_name])
+  end
+  return arr
+end
+# team_names
+
+def player_numbers(teamNam)
+newArr=[]
+  game_hash.each do |team|
+    if(team[1][:team_name]==teamNam)
+       team[1][:players].each do |num |
+        newArr.push( num[:number])
+      end
+    end
+  end
+  return newArr
+end
+# player_numbers("Charlotte Hornets")
+
+def player_stats(playerName)
+  game_hash.each do |team|
+    team[1][:players].each do |data|
+      if( data[:player_name]==playerName)
+      return data
+      end
+    end
+  end
+end
+
+# player_stats("Kemba Walker")
+
+def findMaxShoe
+  allPlayers = game_hash[:home][:players] + game_hash[:away][:players]
+  allPlayers.max_by do |player|
+    player[:shoe]
+  end 
+end
+def big_shoe_rebounds
+
+  return findMaxShoe[:rebounds]
+
+end
+
+# big_shoe_rebounds
+
+def num_points_scored(plName)
+  game_hash.each do |team|
+    team[1][:players].each do |data|
+      if( data[:player_name]==plName)
+      return data[:points]
+      end
+    end
+  end
+end
